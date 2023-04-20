@@ -15,11 +15,19 @@ pipeline {
 
         stage("build & SonarQube analysis") {
             steps {
-              withSonarQubeEnv('sonarqube_server') {
+              withSonarQubeEnv('My SonarQube Server') {
                 sh 'mvn clean package sonar:sonar'
               }
             }
         }
+
+        stage ('artifactory'){
+             rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "jfrog-jenkins",
+                    releaseRepo: 'libs-release-local',
+                    snapshotRepo: 'libs-snapshot-local'
+                )
+        }
     }
 }
-
