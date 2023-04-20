@@ -14,9 +14,15 @@ pipeline {
         }
 
         stage('Sonarqube'){
-            withSonarQubeEnv('My SonarQube Server') {
+            steps {
+                withSonarQubeEnv('My SonarQube Server') {
                 sh 'mvn package sonar:sonar'
-              }
+                }
+            }
         }
     }
 }
+
+
+withSonarQubeEnv('My SonarQube Server') {
+                sh 'mvn package sonar:sonar'
