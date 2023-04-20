@@ -24,8 +24,8 @@ pipeline {
         stage ('artifactory'){
             steps{
                 rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
-                    serverId: "jfrog-jenkins",
+                    id: 'MAVEN_DEPLOYER',
+                    serverId: 'jfrog-jenkins',
                     releaseRepo: 'libs-release-local',
                     snapshotRepo: 'libs-snapshot-local'
                 )
