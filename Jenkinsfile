@@ -25,7 +25,7 @@ pipeline {
             steps{
                 rtMavenDeployer (
                     id: 'MAVEN_DEPLOYER',
-                    serverId: 'jfrog-jenkins',
+                    serverId: 'JFROG-JENKINS',
                     releaseRepo: 'libs-release-local',
                     snapshotRepo: 'libs-snapshot-local'
                 )
