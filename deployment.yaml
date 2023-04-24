@@ -29,8 +29,11 @@ spec:
             - containerPort: 80
               protocol: TCP
           livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
             timeoutSeconds: 30
-      restartPolicy: Never
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -46,4 +49,5 @@ spec:
   selector:
     app: jenkins
   type: LoadBalancer
+
 
