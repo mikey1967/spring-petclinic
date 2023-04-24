@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+    stages{
+        stage('test'){
+            steps {
+                sshagent(['k8s']) {
+                  sh 'ssh ubuntu@172.31.30.108 ./kubectl apply -f /home/ubuntu/deployment.yaml --kubeconfig=/home/ubuntu/.kube/config'
+               }
+            }
+        }
+    }
+}
