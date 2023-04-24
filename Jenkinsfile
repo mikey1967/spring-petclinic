@@ -25,7 +25,7 @@ pipeline {
             steps{
                 rtMavenDeployer (
                     id: 'MAVEN_DEPLOYER',
-                    serverId: 'JFROG-JENKINS',
+                    serverId: 'JFROG_JENKINS',
                     releaseRepo: 'libs-release-local',
                     snapshotRepo: 'libs-snapshot-local'
                 )
@@ -43,6 +43,19 @@ pipeline {
             }
         }
 
+        stage('publish artifacts to docker'){
+            steps{
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'docker_server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//home//ubuntu', remoteDirectorySDF: false, removePrefix: 'target', sourceFiles: 'target/*.jar'), sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//home/ubuntu', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'Dockerfile')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+            }
+        }
+
+        stage('docker build'){
+            steps{
+                sshagent(['docker']) {
+                  sh 'ssh ubuntu@172.31.81.130 docker image build -t mikey:1.0 .'
+               }
+            }
+        }
     }
 }
 
