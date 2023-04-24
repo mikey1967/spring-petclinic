@@ -23,10 +23,10 @@ spec:
         app: jenkins
     spec:
       containers:
-        - image: nginx
+        - image: mike8309/mikey:1.0
           name: mikey-cont1
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               protocol: TCP
 ---
 apiVersion: v1
@@ -39,7 +39,7 @@ spec:
   ports:
     - port: 35000
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: jenkins
   type: LoadBalancer
