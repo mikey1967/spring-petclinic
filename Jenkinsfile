@@ -58,5 +58,13 @@ pipeline {
                }
             }
         }
+
+        stage('deploy to k8s'){
+            steps{
+                sshagent(['k8s']) {
+                  sh 'scp -r -o StrictHostKeyChecking=no deployment.yaml ubuntu@172.31.30.108:/home/ubuntu'
+                  sh 'ssh ubuntu@172.31.30.108 ./kubectl apply -f /home/ubuntu/deployment.yaml --kubeconfig=/home/ubuntu/.kube/config'
+              }
+            }
+        }
     }
-}
