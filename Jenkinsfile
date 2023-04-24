@@ -53,9 +53,10 @@ pipeline {
             steps{
                 sshagent(['docker']) {
                   sh 'ssh ubuntu@172.31.81.130 docker image build -t mikey:1.0 .'
+                  sh 'ssh ubuntu@172.31.81.130 docker image tag mikey:1.0 mike8309/mikey:1.0'
+                  sh 'ssh ubuntu@172.31.81.130 docker image push mike8309/mikey:1.0' 
                }
             }
         }
     }
 }
-
