@@ -28,7 +28,7 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
-      restartPolicy: Never
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
