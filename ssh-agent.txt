@@ -1,0 +1,12 @@
+node {
+    stage ('git url') {
+        git branch: 'main', url: 'https://github.com/mikey1967/spring-petclinic.git'
+    }
+    stage('ssh-conect'){
+        sshagent(['kalyan_id']) {
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.93.168'
+            sh 'scp /var/lib/jenkins/workspace/kalyan/kalyan.sh ubuntu@172.31.93.168:/home/ubuntu'
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.93.168 sh kalyan.sh'
+        }
+    }
+}
