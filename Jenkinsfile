@@ -7,6 +7,7 @@ pipeline {
         maven 'MAVEN'
         jdk 'java'
     }
+    triggers { pollSCM('* * * * *') }
     stages {
         stage('clone the url'){
             steps {
