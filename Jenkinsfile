@@ -4,7 +4,7 @@ pipeline {
         choice (name: 'mikey1', choices: ['main','mikey','akhil','jyo'], description: '')
     }
     tools {
-        maven 'MAVEN'
+        mvn 'MAVEN'
         jdk 'java'
     }
     stages {
