@@ -5,7 +5,6 @@ pipeline {
     }
     tools {
         maven 'MAVEN'
-        jdk 'java'
     }
     stages {
         stage('clone the url'){
