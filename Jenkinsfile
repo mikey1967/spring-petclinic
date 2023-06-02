@@ -4,7 +4,8 @@ pipeline {
         choice (name: 'mikey1', choices: ['main','mikey','akhil','jyo'], description: '')
     }
     tools {
-        maven 'MAVEN'
+        maven '/home/ubuntu/apache-maven-3.9.1'
+        jdk 'java'
     }
     stages {
         stage('clone the url'){
