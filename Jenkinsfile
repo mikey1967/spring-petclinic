@@ -3,6 +3,10 @@ pipeline {
     parameters{
         choice (name: 'mikey1', choices: ['main','mikey','akhil','jyo'], description: '')
     }
+    tools {
+        maven 'MAVEN'
+        jdk 'java'
+    }
     stages {
         stage('clone the url'){
             steps {
