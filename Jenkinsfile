@@ -1,5 +1,5 @@
 pipeline {
-    agent 
+    agent any
     parameters{
         choice (name: 'mikey1', choices: ['main','mikey','akhil','jyo'], description: '')
     }
