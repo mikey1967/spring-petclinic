@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent 
+    parameters{
+        choice (name: 'mikey1', choices: ['main','mikey','akhil','jyo'], description: '')
+    }
     stages {
         stage('clone the url'){
             steps {
