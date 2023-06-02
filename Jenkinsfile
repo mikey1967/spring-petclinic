@@ -1,7 +1,6 @@
 pipeline {
     agent any
     parameters{
-        choice (name: 'mikey1', choices: ['main','mikey','akhil','jyo'], description: '')
         string(name: 'TEST', defaultValue: 'mikey', description: 'Waste fellow')
     }
     tools {
