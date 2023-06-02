@@ -2,6 +2,7 @@ pipeline {
     agent any
     parameters{
         choice (name: 'mikey1', choices: ['main','mikey','akhil','jyo'], description: '')
+        string(name: 'TEST', defaultValue: 'mikey', description: 'Waste fellow')
     }
     tools {
         maven 'MAVEN'
@@ -20,5 +21,12 @@ pipeline {
                 sh 'mvn package'
             }
         }
+
+        stage ('testing paramater'){
+            steps{
+                echo "${params.TEST}"
+            }
+        }
     }
 }
+
