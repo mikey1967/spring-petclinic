@@ -32,7 +32,7 @@ pipeline {
                     id: 'maven-deployer',
                     serverId: 'JFROG',
                     releaseRepo: mikey-libs-release,
-                    snapshotRepo: mikey-libs-snapshot,
+                    snapshotRepo: mikey-libs-snapshot
                 )
             }
         }
@@ -43,7 +43,7 @@ pipeline {
                     tool: 'MAVEN',
                     pom: 'pom.xml',
                     goals: 'clean install',
-                    deployerId: "maven-deployer"
+                    deployerId: 'maven-deployer'
                 )
             }
         }
