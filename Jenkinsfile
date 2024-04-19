@@ -1,31 +1,18 @@
 pipeline {
     agent any
-    parameters{
-        string(name: 'TEST', defaultValue: 'mikey', description: 'Waste fellow')
-    }
-    tools {
-        maven 'MAVEN'
-        jdk 'java'
-    }
-    triggers { pollSCM('* * * * *') }
-    stages {
-        stage('clone the url'){
+    stages{
+        stage('clone') {
             steps {
                 git url: 'https://github.com/mikey1967/spring-petclinic.git', branch: 'main'
             }
-        }
-
-        stage('build'){
+        stage('build') {
             steps {
                 sh 'mvn package'
             }
         }
-
-        stage ('testing paramater'){
-            steps{
-                echo "${params.TEST}"
+        stage('archiveartifacts'){
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            junit '**/surefire-reports/*.xml'
             }
         }
-    }
-}
-
