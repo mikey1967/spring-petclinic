@@ -17,5 +17,37 @@ pipeline {
             junit '**/surefire-reports/*.xml'
             }
         }
+
+        stage('sonar'){
+            steps{
+                withSonarQubeEnv('sonarqube_server') {
+                sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
+
+        stage('artifactory') {
+            steps {
+                rtMavenDeployer (
+                    id: 'maven-deployer',
+                    serverId: 'JFROG',
+                    releaseRepo: mikey-libs-release,
+                    snapshotRepo: mikey-libs-snapshot,
+                )
+            }
+        }
+        
+        stage('Build Maven Project') {
+            steps {
+                rtMavenRun (
+                    tool: 'MAVEN',
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    deployerId: "maven-deployer"
+                )
+            }
+        }
+
     }
 }
+            
