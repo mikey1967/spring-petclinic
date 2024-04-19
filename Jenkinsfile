@@ -31,8 +31,8 @@ pipeline {
                 rtMavenDeployer (
                     id: 'maven-deployer',
                     serverId: 'JFROG',
-                    releaseRepo: mikey-libs-release,
-                    snapshotRepo: mikey-libs-snapshot
+                    releaseRepo: 'mikey-libs-release',
+                    snapshotRepo: 'mikey-libs-snapshot'
                 )
             }
         }
